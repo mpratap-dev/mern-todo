@@ -29,6 +29,10 @@ const Sidebar = () => {
         setActiveListItem([firstItem._id]);
         const formattedList = data.map(FormateData);
         setList(formattedList);
+      } else {
+        setList([]);
+        navigate('/');
+        setActiveListItem([]);
       }
     } catch (error) {
       console.error(error);
@@ -70,10 +74,9 @@ const Sidebar = () => {
         <Input.Group>
           <Input
             name="name"
-            size="large"
             value={inputValue}
             placeholder="New list"
-            style={{ border: 0, padding: '10px 25px' }}
+            style={{ border: 0, padding: '10px 25px', outline: 'none', boxShadow: 'none' }}
             prefix={<PlusOutlined />}
             onChange={(event) => setInputValue(event.target.value)}
           />

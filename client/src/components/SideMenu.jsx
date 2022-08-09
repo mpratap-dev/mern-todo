@@ -9,10 +9,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 const SideMenu = ({ label, id, getLists }) => {
   const items = [
     {
-      label: <Text type="danger">Remove list</Text>,
+      label: <Text style={{ color: '#ff4d4f' }}>Remove list</Text>,
       key: id,
       icon: (
-        <Text type="danger">
+        <Text style={{ color: '#ff4d4f' }}>
           <DeleteOutlined />
         </Text>
       ),
@@ -20,7 +20,6 @@ const SideMenu = ({ label, id, getLists }) => {
   ];
 
   const handleClick = async ({ key }) => {
-    console.log(key);
     try {
       const { data: { message: msg } } = await axios.delete(`${BASE_URL}lists/${id}`);
       getLists();

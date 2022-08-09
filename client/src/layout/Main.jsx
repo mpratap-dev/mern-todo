@@ -2,6 +2,7 @@ import React from "react";
 import { Layout } from "antd";
 import { Routes, Route } from "react-router-dom";
 import TodoList from "../components/TodoList";
+import EmptyPage from "../components/Empty";
 const { Content } = Layout;
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
         }}
       >
         <Routes>
+          <Route path="/" element={<EmptyPage />} />
           <Route path="/:id" element={<TodoList />} />
         </Routes>
       </Content>

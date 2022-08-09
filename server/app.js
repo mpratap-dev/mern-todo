@@ -15,9 +15,9 @@ app.use(express.static("public"));
 app.use('/lists', listRoutes);
 
 async function main() {
-  await mongoose.connect('mongodb://localhost:27017/todoList');  
+  await mongoose.connect('mongodb+srv://pratap1995:pratap1995@devconnector.go1qu.mongodb.net/todoList?retryWrites=true&w=majority');  
 }
 
-main().catch(err => console.log(err));
+main().then(() => console.log('☑️  MongoDB connected  ☑️')).catch(err => console.log(err));
 
 app.listen(PORT, () =>  console.log(`✅ App listening on port ${PORT} ✅`));

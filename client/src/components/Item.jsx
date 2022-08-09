@@ -10,7 +10,6 @@ const Item = ({ defaultValue, label, id, getList }) => {
   const [checked, setChecked] = useState(defaultValue);
 
   const handleChange = async ({ target: { checked } }) => {
-    console.log(id)
     const { data: { status, message: msg } } = await axios.patch(`${BASE_URL}lists/items/update/${id}`, { done: checked });
     if(status) {
       message.success(msg);
@@ -37,7 +36,8 @@ const Item = ({ defaultValue, label, id, getList }) => {
         <Text delete={checked}>{label}</Text>
       </Checkbox>
       <Button
-        danger
+        type="text"
+        style={{ color: '#ff4d4f' }}
         onClick={handleDelete}
         size="small"
         icon={<DeleteOutlined style={{ fontSize: "12px" }} />}
