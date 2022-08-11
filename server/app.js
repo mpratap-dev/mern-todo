@@ -5,19 +5,28 @@ const app = express();
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 
-// const itemRoutes = require("./routes/items");
 const listRoutes = require("./routes/lists");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static("public"));
-app.use('/lists', listRoutes);
+app.use("/lists", listRoutes);
 
-async function main() {
-  await mongoose.connect('mongodb+srv://pratap1995:pratap1995@devconnector.go1qu.mongodb.net/todoList?retryWrites=true&w=majority');  
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static("../client/build"));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  });
 }
 
-main().then(() => console.log('☑️  MongoDB connected  ☑️')).catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(
+    "mongodb+srv://pratap1995:pratap1995@devconnector.go1qu.mongodb.net/todoList?retryWrites=true&w=majority"
+  );
+}
 
-app.listen(PORT, () =>  console.log(`✅ App listening on port ${PORT} ✅`));
+main()
+  .then(() => console.log("☑️  MongoDB connected  ☑️"))
+  .catch((err) => console.log(err));
+
+app.listen(PORT, () => console.log(`✅ App listening on port ${PORT} ✅`));
